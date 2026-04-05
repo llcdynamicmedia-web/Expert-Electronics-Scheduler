@@ -301,12 +301,27 @@ function formHTML(prefix) {
   return `
     <div class="form-row-2">
       <div class="form-group"><label>Customer name *</label><input id="${prefix}name" type="text" placeholder="Full name"></div>
-      <div class="form-group"><label>Phone</label><input id="${prefix}phone" type="text" placeholder="(815) 000-0000"></div>
+      <div class="form-group"><label>Phone *</label><input id="${prefix}phone" type="text" placeholder="(815) 000-0000"></div>
     </div>
     <div class="form-group"><label>Vehicle *</label><input id="${prefix}vehicle" type="text" placeholder="Year, make, model"></div>
     <div class="form-group"><label>Service *</label><input id="${prefix}service" type="text" placeholder="e.g. remote start, stereo install"></div>
     <div class="form-row-2">
       <div class="form-group"><label>Date *</label><input id="${prefix}date" type="date" value="${t}"></div>
+      <div class="form-group"><label>Drop-off time *</label>
+        <select id="${prefix}time">
+          <option value="9:00 AM">9:00 AM</option>
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="11:00 AM">11:00 AM</option>
+          <option value="12:00 PM">12:00 PM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="2:00 PM">2:00 PM</option>
+          <option value="3:00 PM">3:00 PM</option>
+          <option value="4:00 PM">4:00 PM</option>
+          <option value="5:00 PM">5:00 PM</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row-2">
       <div class="form-group"><label>Assigned to</label>
         <select id="${prefix}installer">
           <option value="Adam">Adam</option>
@@ -406,7 +421,7 @@ function renderCalendar() {
       ${da.length === 0 ? '<div class="day-empty">Open</div>' :
         da.map(a => `<div class="chip s-${a.status}" onclick="cycleStatus('${a.id}')" title="Click to update status">
           <div class="chip-name">${a.name}</div>
-          <div class="chip-svc">${a.service}</div>
+          <div class="chip-svc">${a.time || '9:00 AM'} &mdash; ${a.service}</div>
         </div>`).join('')}
     </div>`;
   }).join('');
@@ -445,7 +460,7 @@ function renderList() {
         <div class="ameta">
           <span class="badge badge-${a.status}">${sl[a.status]}</span>
           <span class="badge badge-${(a.installer||'adam').toLowerCase()}">${a.installer||''}</span>
-          <span style="font-size:11px;color:var(--text-muted);">9am drop-off</span>
+          <span style="font-size:11px;color:var(--text-muted);">${a.time || '9:00 AM'} drop-off</span>
         </div>
         ${a.phone ? `<div class="aphone">${a.phone}</div>` : ''}
         ${a.notes ? `<div class="anotes">${a.notes}</div>` : ''}
@@ -462,11 +477,14 @@ function render() { renderStats(); renderCalendar(); renderList(); }
 
 function saveAppt(prefix) {
   const name = document.getElementById(prefix+'name').value.trim();
+  const phone = document.getElementById(prefix+'phone').value.trim();
   const date = document.getElementById(prefix+'date').value;
-  if (!name || !date) { showToast('Name and date required'); return; }
+  const time = document.getElementById(prefix+'time').value;
+  if (!name || !date || !phone) { showToast('Name, phone and date required'); return; }
   appts.push({
     id: Date.now().toString(36) + Math.random().toString(36).slice(2,5),
     name, date,
+    time: document.getElementById(prefix+'time').value,
     phone: document.getElementById(prefix+'phone').value.trim(),
     vehicle: document.getElementById(prefix+'vehicle').value.trim(),
     service: document.getElementById(prefix+'service').value.trim() || 'Service TBD',
@@ -490,6 +508,8 @@ function clearForm(prefix) {
   if (d) d.value = todayStr();
   const ins = document.getElementById(prefix+'installer');
   if (ins) ins.value = 'Adam';
+  const tm = document.getElementById(prefix+'time');
+  if (tm) tm.value = '9:00 AM';
 }
 
 function cycleStatus(id) {
