@@ -72,6 +72,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 }
 .form-group textarea { resize: vertical; min-height: 56px; }
 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 480px) {
+  .form-row-2 { grid-template-columns: 1fr; }
+}
 .btn-add {
   width: 100%; padding: 10px; background: var(--blue); color: white;
   border: none; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
@@ -226,6 +229,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   .topbar-sub { display: none; }
   .aactions { flex-direction: row; }
   .content { padding-bottom: 80px; }
+  .modal-sheet .form-row-2 { grid-template-columns: 1fr; }
 }
 </style>
 </head>
