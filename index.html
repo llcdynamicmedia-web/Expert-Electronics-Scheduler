@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Expert Electronics — Scheduler</title>
+<title>Expert Electronics</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --blue: #1a5fb4;
-  --blue-light: #dce8f8;
-  --blue-mid: #4a90d9;
+  --blue: #b52b2b;
+  --blue-light: #fde0e0;
+  --blue-mid: #d94a4a;
   --green: #1c7a4a;
   --green-light: #d6f0e2;
   --amber: #a05c00;
@@ -64,7 +64,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   transition: border-color 0.15s; outline: none;
 }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-  border-color: var(--blue-mid); background: white;
+  border-color: #d94a4a; background: white;
 }
 .form-group textarea { resize: vertical; min-height: 56px; }
 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -76,7 +76,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   border: none; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
   font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s;
 }
-.btn-add:hover { background: #1550a0; }
+.btn-add:hover { background: #8a1f1f; }
 .btn-clear {
   width: 100%; padding: 7px; background: none; color: var(--text-muted);
   border: 1px solid var(--border); border-radius: var(--radius-sm);
@@ -94,7 +94,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
 }
 .wnav-btn:hover { background: var(--blue-light); }
 .wnav-btn.today { background: var(--blue); color: white; border-color: var(--blue); }
-.wnav-btn.today:hover { background: #1550a0; }
+.wnav-btn.today:hover { background: #8a1f1f; }
 .week-title { flex: 1; font-size: 14px; font-weight: 600; text-align: center; }
 
 .calendar { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; margin-bottom: 24px; }
