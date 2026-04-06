@@ -7,234 +7,168 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --blue: #b52b2b;
-  --blue-light: #fde0e0;
-  --blue-mid: #d94a4a;
-  --green: #1c7a4a;
-  --green-light: #d6f0e2;
-  --amber: #a05c00;
-  --amber-light: #fdecd0;
-  --red: #b52b2b;
-  --red-light: #fde0e0;
-  --gray: #5a5a5a;
-  --gray-light: #f0eeeb;
-  --border: #ddd8d0;
-  --bg: #f7f5f2;
-  --surface: #ffffff;
-  --text: #1a1a1a;
-  --text-muted: #6b6560;
-  --radius: 10px;
-  --radius-sm: 6px;
+  --red:#b52b2b; --red-light:#fde0e0; --red-dark:#8a1f1f;
+  --green:#1c7a4a; --green-light:#d6f0e2;
+  --amber:#a05c00; --amber-light:#fdecd0;
+  --yellow:#b58a00; --yellow-light:#fff8d6;
+  --border:#ddd8d0; --bg:#f7f5f2; --surface:#fff;
+  --text:#1a1a1a; --muted:#6b6560;
+  --radius:10px; --radius-sm:6px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; min-height: 100vh; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh;}
 
-.topbar {
-  background: var(--blue); color: white; padding: 0 20px;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 56px; position: sticky; top: 0; z-index: 50;
-}
-.topbar-left { display: flex; align-items: center; gap: 12px; }
-.topbar-logo { display: none; }
-.topbar-title { font-size: 15px; font-weight: 600; }
-.topbar-sub { font-size: 11px; opacity: 0.7; }
-.saved-ind { font-size: 11px; opacity: 0.8; font-family: 'DM Mono', monospace; }
+/* TOPBAR */
+.topbar{background:#1a1a1a;color:white;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:50;}
+.topbar-left{display:flex;align-items:center;gap:10px;}
+.topbar-left img{height:38px;width:auto;display:block;}
+.topbar-sub{font-size:11px;opacity:0.6;}
+.saved-ind{font-size:11px;opacity:0.85;font-family:'DM Mono',monospace;}
 
-.layout { display: grid; grid-template-columns: 300px 1fr; min-height: calc(100vh - 56px); }
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 56px);}
+.sidebar{background:var(--surface);border-right:1px solid var(--border);padding:14px;display:flex;flex-direction:column;gap:14px;overflow-y:auto;max-height:calc(100vh - 56px);}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.content{padding:14px;overflow-y:auto;}
 
-.sidebar {
-  background: var(--surface); border-right: 1px solid var(--border);
-  padding: 16px; display: flex; flex-direction: column; gap: 16px;
-}
-.sec-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
-  text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;
-}
-.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.stat { background: var(--bg); border-radius: var(--radius-sm); padding: 10px; border: 1px solid var(--border); }
-.stat .num { font-size: 24px; font-weight: 600; line-height: 1; }
-.stat .lbl { font-size: 11px; color: var(--text-muted); margin-top: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+/* STATS */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.stat{background:var(--bg);border-radius:var(--radius-sm);padding:10px;border:1px solid var(--border);}
+.stat .num{font-size:22px;font-weight:600;line-height:1;}
+.stat .lbl{font-size:11px;color:var(--muted);margin-top:3px;text-transform:uppercase;letter-spacing:0.04em;}
 
-.form-group { margin-bottom: 9px; }
-.form-group label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 3px; font-weight: 500; }
-.form-group input, .form-group select, .form-group textarea {
-  width: 100%; padding: 8px 10px; border: 1px solid var(--border);
-  border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
-  font-size: 13px; background: var(--bg); color: var(--text);
-  transition: border-color 0.15s; outline: none;
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-  border-color: #d94a4a; background: white;
-}
-.form-group textarea { resize: vertical; min-height: 56px; }
-.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-@media (max-width: 480px) {
-  .form-row-2 { grid-template-columns: 1fr; }
-}
-.btn-add {
-  width: 100%; padding: 10px; background: var(--blue); color: white;
-  border: none; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
-  font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s;
-}
-.btn-add:hover { background: #8a1f1f; }
-.btn-clear {
-  width: 100%; padding: 7px; background: none; color: var(--text-muted);
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
-  font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; margin-top: 6px;
-}
-.btn-clear:hover { background: var(--bg); }
+/* FORM */
+.form-group{margin-bottom:8px;}
+.form-group label{display:block;font-size:12px;color:var(--muted);margin-bottom:3px;font-weight:500;}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:7px 9px;border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;background:var(--bg);color:var(--text);transition:border-color 0.15s;outline:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--red);background:white;}
+.form-group textarea{resize:vertical;min-height:52px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.svc-templates{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
+.svc-pill{padding:3px 8px;border-radius:99px;border:1px solid var(--border);background:none;font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);cursor:pointer;transition:all 0.12s;}
+.svc-pill:hover{border-color:var(--red);color:var(--red);background:var(--red-light);}
+.btn-add{width:100%;padding:9px;background:var(--red);color:white;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+.btn-add:hover{background:var(--red-dark);}
+.btn-clear{width:100%;padding:6px;background:none;color:var(--muted);border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;margin-top:5px;}
+.btn-clear:hover{background:var(--bg);}
 
-.content { padding: 16px; overflow-y: auto; }
+/* WEEK NAV */
+.week-nav{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.wnav-btn{padding:6px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);}
+.wnav-btn:hover{background:var(--red-light);}
+.wnav-btn.today{background:var(--red);color:white;border-color:var(--red);}
+.week-title{flex:1;font-size:13px;font-weight:600;text-align:center;}
 
-.week-nav { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-.wnav-btn {
-  padding: 6px 14px; background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); cursor: pointer; font-family: 'DM Sans', sans-serif;
-  font-size: 13px; color: var(--text); transition: background 0.15s;
-}
-.wnav-btn:hover { background: var(--blue-light); }
-.wnav-btn.today { background: var(--blue); color: white; border-color: var(--blue); }
-.wnav-btn.today:hover { background: #8a1f1f; }
-.week-title { flex: 1; font-size: 14px; font-weight: 600; text-align: center; }
+/* CALENDAR - chip-based simple view */
+.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:20px;}
+.day-col{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px;min-height:100px;}
+.day-col.is-today{border-color:var(--red);border-width:2px;}
+.day-col.is-past{opacity:0.6;}
+.day-head{text-align:center;margin-bottom:6px;}
+.day-name{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;}
+.day-num{font-size:17px;font-weight:600;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:2px auto 0;}
+.is-today .day-num{background:var(--red);color:white;}
+.day-empty{font-size:11px;color:var(--muted);text-align:center;padding:8px 0;opacity:0.5;}
+.day-appts{display:flex;flex-direction:row;flex-wrap:wrap;gap:3px;}
+.chip{border-radius:var(--radius-sm);padding:5px 7px;cursor:pointer;border:1px solid transparent;flex:1;min-width:80px;}
+.chip:hover{opacity:0.85;}
+/* Adam chips - red tones */
+.chip.adam-scheduled{background:#dce8f8;border-color:#b8d4f0;}
+.chip.adam-inprogress{background:#ccfbf1;border-color:#2dd4bf;}
+.chip.adam-done{background:#d1fae5;border-color:#6ee7b7;opacity:0.85;}
+/* Nick chips - purple tones */
+.chip.nick-scheduled{background:#fef3c7;border-color:#d97706;}
+.chip.nick-inprogress{background:#ccfbf1;border-color:#2dd4bf;}
+.chip.nick-done{background:#d1fae5;border-color:#6ee7b7;opacity:0.85;}
+.chip-installer{display:inline-block;font-size:9px;padding:1px 5px;border-radius:99px;margin-bottom:3px;font-weight:600;}
+.chip-adam-label{background:#dce8f8;color:#1a5fb4;}
+.chip-nick-label{background:#fef3c7;color:#92400e;}
+.chip-name{font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.chip-svc{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-.calendar { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; margin-bottom: 24px; }
-.day-col {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 9px; min-height: 120px;
-}
-.day-col.is-today { border-color: var(--blue); border-width: 2px; }
-.day-col.is-past { opacity: 0.6; }
-.day-head { text-align: center; margin-bottom: 7px; }
-.day-name { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
-.day-num {
-  font-size: 18px; font-weight: 600; width: 32px; height: 32px;
-  border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 2px auto 0;
-}
-.is-today .day-num { background: var(--blue); color: white; }
-.day-empty { font-size: 11px; color: var(--text-muted); text-align: center; padding: 8px 0; opacity: 0.5; }
+/* APPOINTMENT LIST */
+.list-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px;}
+.list-title{font-size:15px;font-weight:600;}
+.filter-btns{display:flex;gap:4px;flex-wrap:wrap;}
+.fbtn{padding:4px 11px;border-radius:99px;border:1px solid var(--border);background:none;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--muted);cursor:pointer;}
+.fbtn.active{background:var(--red);color:white;border-color:var(--red);}
+.appt-list{display:flex;flex-direction:column;gap:7px;}
+.acard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:11px 13px;display:flex;gap:11px;align-items:flex-start;}
+.acard.s-scheduled{border-left:3px solid var(--red);}
+.acard.s-inprogress{border-left:3px solid #0d9488;}
+.acard.s-done{border-left:3px solid var(--green);background:#f0faf5;}
+.adate{text-align:center;min-width:38px;}
+.adate .dd{font-size:10px;color:var(--muted);text-transform:uppercase;}
+.adate .dn{font-size:19px;font-weight:600;line-height:1.1;}
+.adate .dm{font-size:10px;color:var(--muted);}
+.adiv{width:1px;background:var(--border);align-self:stretch;}
+.abody{flex:1;min-width:0;}
+.aname{font-size:14px;font-weight:600;}
+.aveh{font-size:12px;color:var(--muted);margin-top:1px;}
+.asvc{font-size:13px;margin-top:3px;}
+.ameta{display:flex;align-items:center;gap:5px;margin-top:4px;flex-wrap:wrap;}
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:500;padding:2px 7px;border-radius:99px;border:1px solid transparent;}
+.badge-scheduled{background:var(--red-light);color:var(--red);border-color:#f0b8b8;}
+.badge-inprogress{background:#ccfbf1;color:#0f766e;border-color:#2dd4bf;}
+.badge-done{background:var(--green-light);color:var(--green);border-color:#a8dfc2;}
+.badge-adam{background:#dce8f8;color:#1a5fb4;border-color:#b8d4f0;}
+.badge-nick{background:#fef3c7;color:#92400e;border-color:#d97706;}
+.aphone a{font-size:11px;color:var(--red);font-family:'DM Mono',monospace;text-decoration:none;margin-top:4px;display:inline-block;}
+.aphone a:hover{text-decoration:underline;}
+.anotes{font-size:11px;color:var(--muted);font-style:italic;margin-top:3px;}
+.aactions{display:flex;gap:4px;flex-shrink:0;flex-direction:column;}
+.abtn{padding:5px 9px;border-radius:var(--radius-sm);border:1px solid var(--border);background:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap;}
+.abtn:hover{background:var(--bg);}
+.abtn.go{color:var(--green);border-color:var(--green);}
+.abtn.go:hover{background:var(--green-light);}
+.abtn.edit{color:var(--amber);border-color:#f0c060;}
+.abtn.edit:hover{background:var(--amber-light);}
+.abtn.rm{color:var(--red);border-color:#f0c0c0;}
+.abtn.rm:hover{background:var(--red-light);}
+.empty{text-align:center;padding:32px 20px;color:var(--muted);background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius);}
 
-.chip {
-  border-radius: var(--radius-sm); padding: 5px 6px; margin-bottom: 4px;
-  cursor: pointer; border: 1px solid transparent; transition: opacity 0.15s;
-}
-.chip:hover { opacity: 0.8; }
-.chip.s-scheduled { background: var(--blue-light); border-color: #b8d4f0; }
-.chip.s-inprogress { background: var(--green-light); border-color: #a8dfc2; }
-.chip.s-done { background: var(--gray-light); border-color: var(--border); }
-.chip-name { font-size: 11px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.chip-svc { font-size: 10px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-.list-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
-.list-title { font-size: 15px; font-weight: 600; }
-.filter-btns { display: flex; gap: 5px; flex-wrap: wrap; }
-.fbtn {
-  padding: 4px 12px; border-radius: 99px; border: 1px solid var(--border);
-  background: none; font-family: 'DM Sans', sans-serif; font-size: 12px;
-  color: var(--text-muted); cursor: pointer; transition: all 0.15s;
-}
-.fbtn.active { background: var(--blue); color: white; border-color: var(--blue); }
-
-.appt-list { display: flex; flex-direction: column; gap: 8px; }
-.acard {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 12px 14px;
-  display: flex; gap: 12px; align-items: flex-start;
-}
-.acard.s-scheduled { border-left: 3px solid var(--blue); }
-.acard.s-inprogress { border-left: 3px solid var(--green); }
-.acard.s-done { border-left: 3px solid #bbb; opacity: 0.75; }
-.adate { text-align: center; min-width: 40px; }
-.adate .dd { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
-.adate .dn { font-size: 20px; font-weight: 600; line-height: 1.1; }
-.adate .dm { font-size: 10px; color: var(--text-muted); }
-.adiv { width: 1px; background: var(--border); align-self: stretch; }
-.abody { flex: 1; min-width: 0; }
-.aname { font-size: 14px; font-weight: 600; }
-.aveh { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
-.asvc { font-size: 13px; margin-top: 3px; }
-.ameta { display: flex; align-items: center; gap: 6px; margin-top: 5px; flex-wrap: wrap; }
-.badge {
-  display: inline-flex; align-items: center; font-size: 11px; font-weight: 500;
-  padding: 2px 8px; border-radius: 99px; border: 1px solid transparent;
-}
-.badge-scheduled { background: var(--blue-light); color: var(--blue); border-color: #b8d4f0; }
-.badge-inprogress { background: var(--green-light); color: var(--green); border-color: #a8dfc2; }
-.badge-done { background: var(--gray-light); color: var(--gray); border-color: var(--border); }
-.badge-adam { background: var(--blue-light); color: var(--blue); border-color: #b8d4f0; }
-.badge-nick { background: var(--green-light); color: var(--green); border-color: #a8dfc2; }
-.aphone { font-size: 11px; color: var(--text-muted); font-family: 'DM Mono', monospace; margin-top: 4px; }
-.anotes { font-size: 11px; color: var(--text-muted); font-style: italic; margin-top: 3px; }
-.aactions { display: flex; gap: 5px; flex-shrink: 0; flex-direction: column; }
-.abtn {
-  padding: 5px 10px; border-radius: var(--radius-sm); border: 1px solid var(--border);
-  background: none; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
-  color: var(--text-muted); cursor: pointer; white-space: nowrap; transition: all 0.15s;
-}
-.abtn:hover { background: var(--bg); }
-.abtn.go { color: var(--green); border-color: var(--green); }
-.abtn.go:hover { background: var(--green-light); }
-.abtn.rm { color: var(--red); border-color: #f0c0c0; }
-.abtn.rm:hover { background: var(--red-light); }
-
-.empty { text-align: center; padding: 36px 20px; color: var(--text-muted); background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); }
-
-.toast {
-  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(60px);
-  background: #1a1a1a; color: white; padding: 9px 18px; border-radius: 99px;
-  font-size: 13px; font-weight: 500; transition: transform 0.3s; z-index: 999; pointer-events: none;
-}
-.toast.show { transform: translateX(-50%) translateY(0); }
+/* EDIT MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;}
+.modal-bg.open{display:flex;}
+.modal-box{background:var(--surface);border-radius:var(--radius);padding:20px;width:90%;max-width:460px;max-height:90vh;overflow-y:auto;}
+.modal-box h3{font-size:16px;font-weight:600;margin-bottom:14px;}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px;}
+.btn-save{padding:8px 18px;background:var(--red);color:white;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;}
+.btn-cancel{padding:8px 14px;background:none;color:var(--muted);border:1px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;}
 
 /* MOBILE FAB */
-.fab {
-  display: none;
-  position: fixed; bottom: 20px; right: 20px;
-  width: 56px; height: 56px; border-radius: 50%;
-  background: var(--blue); color: white; border: none;
-  font-size: 28px; cursor: pointer; z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-  align-items: center; justify-content: center;
-}
+.fab{display:none;position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:var(--red);color:white;border:none;font-size:28px;cursor:pointer;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.25);align-items:center;justify-content:center;}
+/* MOBILE ADD MODAL */
+.add-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:flex-end;justify-content:center;}
+.add-modal-bg.open{display:flex;}
+.add-modal-sheet{background:var(--surface);width:100%;max-width:600px;border-radius:16px 16px 0 0;padding:18px;max-height:92vh;overflow-y:auto;}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 14px;}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.modal-header h3{font-size:16px;font-weight:600;}
+.modal-close{padding:5px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:none;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;}
 
-/* MOBILE MODAL */
-.modal-bg {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5); z-index: 200;
-  align-items: flex-end; justify-content: center;
-}
-.modal-bg.open { display: flex; }
-.modal-sheet {
-  background: var(--surface); width: 100%; max-width: 600px;
-  border-radius: 16px 16px 0 0; padding: 20px;
-  max-height: 90vh; overflow-y: auto;
-}
-.modal-handle { width: 40px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 16px; }
-.modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.modal-header h3 { font-size: 16px; font-weight: 600; }
-.modal-close {
-  padding: 6px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm);
-  background: none; font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer;
-}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:#1a1a1a;color:white;padding:9px 18px;border-radius:99px;font-size:13px;font-weight:500;transition:transform 0.3s;z-index:999;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);}
 
-@media (max-width: 760px) {
-  .layout { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
-  .fab { display: flex; }
-  .calendar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .week-title { font-size: 12px; }
-  .topbar-sub { display: none; }
-  .aactions { flex-direction: row; }
-  .content { padding-bottom: 80px; }
-  .modal-sheet .form-row-2 { grid-template-columns: 1fr; }
+@media(max-width:760px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .fab{display:flex;}
+  .calendar{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .week-title{font-size:12px;}
+  .topbar-sub{display:none;}
+  .aactions{flex-direction:row;}
+  .content{padding-bottom:80px;}
 }
+@media(max-width:480px){.form-row-2{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar-left">
-    <img src="data:image/webp;base64,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" style="height:38px;width:auto;display:block;" alt="Expert Electronics">
-    <div class="topbar-sub" style="color:rgba(255,255,255,0.7);font-size:11px;">9924 N 2nd St, Machesney Park &mdash; (815) 378-3296</div>
+    <img src="data:image/webp;base64,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" alt="Expert Electronics">
+    <div class="topbar-sub">9924 N 2nd St, Machesney Park &mdash; (815) 378-3296</div>
   </div>
   <span class="saved-ind" id="saved-ind">Loading...</span>
 </div>
@@ -257,6 +191,13 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
       <span class="week-title" id="week-title"></span>
       <button class="wnav-btn" onclick="changeWeek(1)">Next &#8594;</button>
     </div>
+    <div style="display:flex;gap:14px;align-items:center;margin-bottom:10px;flex-wrap:wrap;">
+      <span style="font-size:12px;color:var(--muted);font-weight:500;">Legend:</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);"><span style="width:12px;height:12px;border-radius:3px;background:#dce8f8;border:1px solid #b8d4f0;display:inline-block;"></span> Adam</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);"><span style="width:12px;height:12px;border-radius:3px;background:#fef3c7;border:1px solid #d97706;display:inline-block;"></span> Nick</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);"><span style="width:12px;height:12px;border-radius:3px;background:#ccfbf1;border:1px solid #2dd4bf;display:inline-block;"></span> In progress</span>
+      <span style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);"><span style="width:12px;height:12px;border-radius:3px;background:var(--bg);border:1px solid #ccc;display:inline-block;"></span> Done</span>
+    </div>
     <div class="calendar" id="calendar"></div>
     <div class="list-header">
       <div class="list-title">Appointments</div>
@@ -271,159 +212,557 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--t
   </div>
 </div>
 
-<button class="fab" onclick="openModal()">+</button>
+<button class="fab" onclick="openAddModal()">+</button>
 
-<div class="modal-bg" id="modal-bg" onclick="handleOverlayClick(event)">
-  <div class="modal-sheet">
+<!-- MOBILE ADD MODAL -->
+<div class="add-modal-bg" id="add-modal-bg" onclick="handleAddOverlay(event)">
+  <div class="add-modal-sheet">
     <div class="modal-handle"></div>
     <div class="modal-header">
       <h3>New appointment</h3>
-      <button class="modal-close" onclick="closeModal()">Close</button>
+      <button class="modal-close" onclick="closeAddModal()">Close</button>
     </div>
     <div id="mobile-form"></div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-bg" id="edit-modal-bg">
+  <div class="modal-box">
+    <h3>Edit appointment</h3>
+    <div id="edit-form-body"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+      <button class="btn-save" onclick="saveEdit()">Save changes</button>
+    </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+/* ===================================================
+   CONFIG
+   Set SHEETS_ENABLED = true and paste your SCRIPT_URL
+   once Google Sheets is set up. Until then all data
+   is saved to localStorage in this browser only.
+   =================================================== */
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyE0JL4J61OHRe5-ZQA9YwfLxT6yUMeqtrGFUS5BPXuaxJgsnFBc00JTE_Mt_M3vh7bzg/exec';
+const SHEETS_ENABLED = true; /* set to false to use localStorage only */
+const LS_KEY = 'ee_appts_v3';
+const TECHS = ['Adam','Nick'];
+const SVC_TEMPLATES = [
+  {label:'Remote start', value:'Remote start install', hours:1.5},
+  {label:'Radio',        value:'Radio/stereo install', hours:1.5},
+  {label:'Door speakers',value:'Door speaker install', hours:1},
+  {label:'Components',   value:'Component speaker install', hours:2},
+  {label:'Sub install',  value:'Subwoofer install', hours:3.5},
+  {label:'4-channel',    value:'4-channel amplifier install', hours:3.5},
+  {label:'Full audio',   value:'Full audio build', hours:6},
+  {label:'Dash cam',     value:'Dash cam install', hours:2},
+  {label:'Radar',        value:'Radar detector install', hours:1.5},
+  {label:'Backup cam',   value:'Backup camera install', hours:1},
+  {label:'Window tint',  value:'Window tint', hours:2},
+  {label:'Intoxalock',   value:'Intoxalock install', hours:2},
+];
 
+/* ===================================================
+   STATE
+   =================================================== */
 let appts = [];
 let weekOffset = 0;
 let currentFilter = 'upcoming';
+let isSaving = false;
+let lastSaveTime = 0;
+let editingId = null;
 
+/* ===================================================
+   DATE HELPERS
+   All dates stored and compared as "YYYY-MM-DD" strings.
+   ALWAYS use localDateStr() — never toISOString() which gives UTC.
+   =================================================== */
+function localDateStr(d) {
+  /* Returns local YYYY-MM-DD for any Date object */
+  const dt = d || new Date();
+  return dt.getFullYear() + '-' +
+    String(dt.getMonth()+1).padStart(2,'0') + '-' +
+    String(dt.getDate()).padStart(2,'0');
+}
+function todayStr() { return localDateStr(new Date()); }
+
+function parseDate(s) {
+  /* Safely parse YYYY-MM-DD into local midnight Date */
+  if (!s) return new Date();
+  const str = String(s).trim();
+  /* Handle YYYY-MM-DD */
+  const m = str.match(/^([0-9]{4})-([0-9]{2})-([0-9]{2})/);
+  if (m) return new Date(+m[1], +m[2]-1, +m[3]);
+  /* Handle M/D/YYYY from Google Sheets */
+  const m2 = str.match(/^([0-9]{1,2})\/([0-9]{1,2})\/([0-9]{4})/);
+  if (m2) return new Date(+m2[3], +m2[1]-1, +m2[2]);
+  return new Date(str);
+}
+
+function normalizeDate(s) {
+  /* Convert any date format to YYYY-MM-DD */
+  if (!s) return '';
+  const str = String(s).trim();
+  if (/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(str)) return str;
+  return localDateStr(parseDate(str));
+}
+
+function timeToDecimal(t) {
+  /* "9:00 AM" -> 9.0, "1:30 PM" -> 13.5 */
+  if (!t) return 9;
+  const parts = t.split(' ');
+  const [h, mi] = parts[0].split(':').map(Number);
+  const ampm = parts[1];
+  let hour = h;
+  if (ampm === 'PM' && h !== 12) hour += 12;
+  if (ampm === 'AM' && h === 12) hour = 0;
+  return hour + (mi || 0) / 60;
+}
+
+/* ===================================================
+   WEEK NAVIGATION
+   Mon-Sun, 7 days. weekOffset shifts by 7 days.
+   =================================================== */
+function getWeekDays() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const dow = today.getDay(); /* 0=Sun, 1=Mon ... 6=Sat */
+  /* Days to subtract to get to Monday */
+  const toMon = dow === 0 ? 6 : dow - 1;
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - toMon + weekOffset * 7);
+  return Array.from({length:7}, (_, i) => {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    return d;
+  });
+}
+
+/* ===================================================
+   OVERLAP VALIDATION
+   Returns true if installer is already booked during [startH, endH)
+   on the given date. Excludes the appointment with excludeId.
+   =================================================== */
+function hasOverlap(date, installer, startH, endH, excludeId) {
+  return appts.some(a => {
+    if (a.id === excludeId) return false;
+    if (a.date !== date) return false;
+    if ((a.installer || 'Adam') !== installer) return false;
+    const aStart = timeToDecimal(a.time || '9:00 AM');
+    const aEnd = aStart + (parseFloat(a.duration) || 1);
+    /* Overlap if intervals intersect */
+    return startH < aEnd && endH > aStart;
+  });
+}
+
+/* ===================================================
+   LOCAL STORAGE
+   =================================================== */
+function lsSave() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(appts)); } catch(e) {}
+}
+function lsLoad() {
+  try { const r = localStorage.getItem(LS_KEY); return r ? JSON.parse(r) : []; } catch(e) { return []; }
+}
+
+/* ===================================================
+   GOOGLE SHEETS: LOAD (JSONP)
+   =================================================== */
+function loadFromSheets() {
+  return new Promise(resolve => {
+    /* Skip sheets if disabled or recently saved */
+    if (!SHEETS_ENABLED) { resolve(null); return; }
+    if (isSaving || (Date.now() - lastSaveTime < 12000)) { resolve(null); return; }
+    setStatus('Syncing...', 'saving');
+    const cb = 'cb_' + Date.now();
+    const s = document.createElement('script');
+    window[cb] = data => {
+      delete window[cb]; s.remove();
+      resolve(Array.isArray(data) ? data : null);
+    };
+    s.onerror = () => { delete window[cb]; resolve(null); };
+    s.src = SCRIPT_URL + '?callback=' + cb + '&t=' + Date.now();
+    document.head.appendChild(s);
+    setTimeout(() => { if (window[cb]) { delete window[cb]; resolve(null); } }, 8000);
+  });
+}
+
+/* ===================================================
+   MERGE LOGIC
+   Merge sheets data with local cache.
+   Local wins if its lastModified is newer.
+   =================================================== */
+function mergeData(sheetsData) {
+  const local = lsLoad();
+
+  /* No sheets data — keep whatever is in localStorage */
+  if (!sheetsData || !SHEETS_ENABLED) {
+    if (local.length > 0) appts = local;
+    return;
+  }
+
+  /* Sheets returned empty but we have local data — trust local */
+  if (sheetsData.length === 0 && local.length > 0) {
+    appts = local;
+    setStatus('Sheet empty — keeping local data', 'error');
+    return;
+  }
+
+  /* Normalize dates from sheets */
+  sheetsData.forEach(a => { a.date = normalizeDate(a.date); });
+
+  /* Merge: local wins if newer (uses lastModified timestamp) */
+  const localMap = {};
+  local.forEach(a => { localMap[a.id] = a; });
+  const merged = {};
+  sheetsData.forEach(a => { merged[a.id] = a; });
+  Object.values(localMap).forEach(a => {
+    const lts = Number(a.lastModified) || 0;
+    const sts = merged[a.id] ? Number(merged[a.id].lastModified) || 0 : -1;
+    if (!merged[a.id] || lts > sts) merged[a.id] = a;
+  });
+
+  appts = Object.values(merged).filter(a => a.id && a.name && a.date);
+  lsSave();
+}
+
+async function load() {
+  const data = await loadFromSheets();
+  mergeData(data);
+  if (!SHEETS_ENABLED) setStatus('Local mode — data saved here only', 'ok');
+  else if (data) setStatus('Synced ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}), 'ok');
+  else setStatus('Offline — using local data', 'error');
+}
+
+/* ===================================================
+   GOOGLE SHEETS: SAVE (no-cors POST)
+   Also saves to localStorage immediately.
+   =================================================== */
+async function save() {
+  isSaving = true;
+  lastSaveTime = Date.now();
+  lsSave(); /* instant local backup */
+  setStatus('Saving...', 'saving');
+  try {
+    if (SHEETS_ENABLED) {
+      const snap = JSON.parse(JSON.stringify(appts));
+      const form = new FormData();
+      form.append('payload', JSON.stringify({action:'save', appointments:snap}));
+      await fetch(SCRIPT_URL, {method:'POST', mode:'no-cors', body:form});
+    }
+    setStatus('Saved ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}), 'ok');
+  } catch(e) { setStatus('Saved locally (sheets offline)', 'error'); }
+  setTimeout(() => { isSaving = false; }, 10000);
+}
+
+function setStatus(msg, state) {
+  const el = document.getElementById('saved-ind');
+  el.textContent = msg;
+  el.style.color = state==='error'?'#ffaaaa':state==='saving'?'rgba(255,255,255,0.4)':'rgba(255,255,255,0.9)';
+}
+
+/* ===================================================
+   FORM HTML
+   =================================================== */
 function formHTML(prefix) {
   const t = todayStr();
+  const pills = SVC_TEMPLATES.map(s =>
+    `<button type="button" class="svc-pill" onclick="fillSvc('${prefix}','${s.value}','${s.hours}')">${s.label}</button>`
+  ).join('');
   return `
     <div class="form-row-2">
       <div class="form-group"><label>Customer name *</label><input id="${prefix}name" type="text" placeholder="Full name"></div>
-      <div class="form-group"><label>Phone *</label><input id="${prefix}phone" type="text" placeholder="(815) 000-0000"></div>
+      <div class="form-group"><label>Phone *</label><input id="${prefix}phone" type="tel" placeholder="(815) 000-0000" oninput="fmtPhone(this)"></div>
     </div>
     <div class="form-group"><label>Vehicle *</label><input id="${prefix}vehicle" type="text" placeholder="Year, make, model"></div>
-    <div class="form-group"><label>Service *</label><input id="${prefix}service" type="text" placeholder="e.g. remote start, stereo install"></div>
+    <div class="form-group">
+      <label>Service *</label>
+      <div class="svc-templates">${pills}</div>
+      <input id="${prefix}service" type="text" placeholder="Or type custom service...">
+    </div>
     <div class="form-row-2">
       <div class="form-group"><label>Date *</label><input id="${prefix}date" type="date" value="${t}"></div>
       <div class="form-group"><label>Drop-off time *</label>
         <select id="${prefix}time">
-          <option value="9:00 AM">9:00 AM</option>
-          <option value="10:00 AM">10:00 AM</option>
-          <option value="11:00 AM">11:00 AM</option>
-          <option value="12:00 PM">12:00 PM</option>
-          <option value="1:00 PM">1:00 PM</option>
-          <option value="2:00 PM">2:00 PM</option>
-          <option value="3:00 PM">3:00 PM</option>
-          <option value="4:00 PM">4:00 PM</option>
-          <option value="5:00 PM">5:00 PM</option>
+          <option>9:00 AM</option><option>9:30 AM</option>
+          <option>10:00 AM</option><option>10:30 AM</option>
+          <option>11:00 AM</option><option>11:30 AM</option>
+          <option>12:00 PM</option><option>12:30 PM</option>
+          <option>1:00 PM</option><option>1:30 PM</option>
+          <option>2:00 PM</option><option>2:30 PM</option>
+          <option>3:00 PM</option><option>3:30 PM</option>
+          <option>4:00 PM</option><option>4:30 PM</option>
+          <option>5:00 PM</option>
         </select>
       </div>
     </div>
     <div class="form-row-2">
       <div class="form-group"><label>Assigned to</label>
         <select id="${prefix}installer">
-          <option value="Adam">Adam</option>
-          <option value="Nick">Nick</option>
+          <option value="Adam">Adam</option><option value="Nick">Nick</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Duration (hrs)</label>
+        <select id="${prefix}duration">
+          <option value="1">1 hr</option><option value="1.5">1.5 hrs</option>
+          <option value="2">2 hrs</option><option value="2.5">2.5 hrs</option>
+          <option value="3">3 hrs</option><option value="3.5">3.5 hrs</option>
+          <option value="4">4 hrs</option><option value="5">5 hrs</option>
+          <option value="6">6 hrs</option><option value="8">All day</option>
         </select>
       </div>
     </div>
-    <div class="form-group"><label>Notes</label><textarea id="${prefix}notes" placeholder="Parts needed, instructions..."></textarea></div>
-    <button class="btn-add" onclick="saveAppt('${prefix}')">+ Add appointment</button>
-    ${prefix === 'd-' ? '<button class="btn-clear" onclick="clearForm(\'d-\')">Clear form</button>' : ''}
+    <div class="form-group"><label>Notes / parts</label><textarea id="${prefix}notes" placeholder="Parts needed, part numbers..."></textarea></div>
+    <button type="button" class="btn-add" id="${prefix}submit">+ Add appointment</button>
+    ${prefix === 'd-' ? '<button type="button" class="btn-clear" onclick="clearForm_desk()">Clear form</button>' : ''}
   `;
 }
 
-function setStatus(msg, state) {
-  const el = document.getElementById('saved-ind');
-  el.textContent = msg;
-  el.style.color = state === 'error' ? '#ffaaaa' : state === 'saving' ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.9)';
+function fmtPhone(el) {
+  let v = el.value.replace(/[^0-9]/g,'').slice(0,10);
+  if (v.length >= 7) v = '('+v.slice(0,3)+') '+v.slice(3,6)+'-'+v.slice(6);
+  else if (v.length >= 4) v = '('+v.slice(0,3)+') '+v.slice(3);
+  else if (v.length) v = '('+v;
+  el.value = v;
 }
 
-function load() {
-  return new Promise(resolve => {
-    setStatus('Loading...', 'saving');
-    const cb = 'cb_' + Date.now();
-    const s = document.createElement('script');
-    window[cb] = data => {
-      appts = Array.isArray(data) ? data : [];
-      setStatus('Synced ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}), 'ok');
-      delete window[cb]; s.remove(); resolve();
-    };
-    s.onerror = () => {
-      setStatus('Could not reach Google Sheets', 'error');
-      appts = []; delete window[cb]; resolve();
-    };
-    s.src = SCRIPT_URL + '?callback=' + cb + '&t=' + Date.now();
-    document.head.appendChild(s);
-    setTimeout(() => { if (window[cb]) { setStatus('Timeout', 'error'); appts = []; delete window[cb]; resolve(); } }, 8000);
-  });
+function fillSvc(prefix, val, hrs) {
+  document.getElementById(prefix+'service').value = val;
+  const dur = document.getElementById(prefix+'duration');
+  if (dur && hrs) dur.value = String(hrs);
 }
 
-async function save() {
-  setStatus('Saving...', 'saving');
-  try {
-    const form = new FormData();
-    form.append('payload', JSON.stringify({ action: 'save', appointments: appts }));
-    await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: form });
-    setStatus('Saved ' + new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}), 'ok');
-  } catch(e) {
-    setStatus('Save failed', 'error');
+/* ===================================================
+   SAVE APPOINTMENT (new)
+   Validates overlap before saving.
+   =================================================== */
+function saveAppt(prefix) {
+  const name = document.getElementById(prefix+'name').value.trim();
+  const phone = document.getElementById(prefix+'phone').value.trim();
+  const date = document.getElementById(prefix+'date').value;
+  if (!name || !date || !phone) { showToast('Name, phone and date required'); return; }
+
+  const installer = document.getElementById(prefix+'installer').value;
+  const time = document.getElementById(prefix+'time').value;
+  const duration = parseFloat(document.getElementById(prefix+'duration').value) || 1;
+  const startH = timeToDecimal(time);
+  const endH = startH + duration;
+
+  /* Check overlap for same installer same day */
+  if (hasOverlap(date, installer, startH, endH, null)) {
+    showToast(installer + ' already has a job at that time!');
+    return;
   }
+
+  appts.push({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2,5),
+    name, date, phone, time, installer, duration: String(duration),
+    vehicle: document.getElementById(prefix+'vehicle').value.trim(),
+    service: document.getElementById(prefix+'service').value.trim() || 'Service TBD',
+    notes: document.getElementById(prefix+'notes').value.trim(),
+    status: 'scheduled',
+    created: new Date().toISOString(),
+    lastModified: Date.now()
+  });
+
+  save(); clearForm(prefix);
+  if (prefix === 'm-') closeAddModal();
+  render();
+  showToast('Appointment added!');
 }
 
-function todayStr() { return new Date().toISOString().split('T')[0]; }
-
-function parseDate(s) {
-  if (!s) return new Date();
-  const p = String(s).trim().split('T')[0].split('-');
-  if (p.length === 3) return new Date(+p[0], +p[1]-1, +p[2]);
-  return new Date(s);
+function clearForm_desk() { clearForm('d-'); }
+function clearForm(prefix) {
+  ['name','phone','vehicle','service','notes'].forEach(f => {
+    const el = document.getElementById(prefix+f); if (el) el.value = '';
+  });
+  const d = document.getElementById(prefix+'date'); if (d) d.value = todayStr();
+  const ins = document.getElementById(prefix+'installer'); if (ins) ins.value = 'Adam';
+  const tm = document.getElementById(prefix+'time'); if (tm) tm.value = '9:00 AM';
+  const dur = document.getElementById(prefix+'duration'); if (dur) dur.value = '1';
 }
 
-function getWeekDays() {
-  const d = new Date(); d.setHours(0,0,0,0);
-  const dow = d.getDay();
-  const mon = new Date(d);
-  mon.setDate(d.getDate() - (dow === 0 ? 6 : dow - 1) + weekOffset * 6);
-  return Array.from({length:6}, (_,i) => { const x = new Date(mon); x.setDate(mon.getDate()+i); return x; });
+/* ===================================================
+   EDIT APPOINTMENT
+   Opens edit modal pre-filled with appointment data.
+   =================================================== */
+function openEditModal(id) {
+  const a = appts.find(x => x.id === id);
+  if (!a) return;
+  editingId = id;
+
+  document.getElementById('edit-form-body').innerHTML = `
+    <div class="form-row-2">
+      <div class="form-group"><label>Customer name *</label><input id="e-name" type="text" value="${a.name||''}"></div>
+      <div class="form-group"><label>Phone *</label><input id="e-phone" type="tel" value="${a.phone||''}" oninput="fmtPhone(this)"></div>
+    </div>
+    <div class="form-group"><label>Vehicle</label><input id="e-vehicle" type="text" value="${a.vehicle||''}"></div>
+    <div class="form-group"><label>Service</label><input id="e-service" type="text" value="${a.service||''}"></div>
+    <div class="form-row-2">
+      <div class="form-group"><label>Date *</label><input id="e-date" type="date" value="${a.date||''}"></div>
+      <div class="form-group"><label>Drop-off time</label>
+        <select id="e-time">
+          ${['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM']
+            .map(t => `<option${t===a.time?' selected':''}>${t}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="form-row-2">
+      <div class="form-group"><label>Assigned to</label>
+        <select id="e-installer">
+          <option${(a.installer||'Adam')==='Adam'?' selected':''}>Adam</option>
+          <option${a.installer==='Nick'?' selected':''}>Nick</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Duration (hrs)</label>
+        <select id="e-duration">
+          ${['1','1.5','2','2.5','3','3.5','4','5','6','8']
+            .map(v => `<option value="${v}"${v===String(a.duration||'1')?' selected':''}>${v} hr${v!=='1'?'s':''}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="form-group"><label>Status</label>
+      <select id="e-status">
+        <option value="scheduled"${a.status==='scheduled'?' selected':''}>Scheduled</option>
+        <option value="inprogress"${a.status==='inprogress'?' selected':''}>In progress</option>
+        <option value="done"${a.status==='done'?' selected':''}>Done</option>
+      </select>
+    </div>
+    <div class="form-group"><label>Notes / parts</label><textarea id="e-notes">${a.notes||''}</textarea></div>
+  `;
+
+  document.getElementById('edit-modal-bg').classList.add('open');
 }
 
+function closeEditModal() {
+  document.getElementById('edit-modal-bg').classList.remove('open');
+  editingId = null;
+}
+
+function saveEdit() {
+  if (!editingId) return;
+  const a = appts.find(x => x.id === editingId);
+  if (!a) return;
+
+  const name = document.getElementById('e-name').value.trim();
+  const phone = document.getElementById('e-phone').value.trim();
+  const date = document.getElementById('e-date').value;
+  if (!name || !date || !phone) { showToast('Name, phone and date required'); return; }
+
+  const installer = document.getElementById('e-installer').value;
+  const time = document.getElementById('e-time').value;
+  const duration = parseFloat(document.getElementById('e-duration').value) || 1;
+  const startH = timeToDecimal(time);
+  const endH = startH + duration;
+
+  /* Check overlap — exclude current appointment */
+  if (hasOverlap(date, installer, startH, endH, editingId)) {
+    showToast(installer + ' already has a job at that time!');
+    return;
+  }
+
+  /* Apply changes */
+  a.name = name; a.phone = phone; a.date = date;
+  a.vehicle = document.getElementById('e-vehicle').value.trim();
+  a.service = document.getElementById('e-service').value.trim();
+  a.time = time; a.installer = installer;
+  a.duration = String(duration);
+  a.status = document.getElementById('e-status').value;
+  a.notes = document.getElementById('e-notes').value.trim();
+  a.lastModified = Date.now();
+
+  save(); closeEditModal(); render();
+  showToast('Appointment updated!');
+}
+
+/* ===================================================
+   STATUS CYCLE (click chip or Start/Done button)
+   =================================================== */
+function cycleStatus(id) {
+  const a = appts.find(x => x.id === id);
+  if (!a) return;
+  a.status = a.status==='scheduled'?'inprogress':a.status==='inprogress'?'done':'scheduled';
+  a.lastModified = Date.now();
+  save(); render();
+  showToast({scheduled:'Scheduled',inprogress:'In progress',done:'Done'}[a.status]);
+}
+
+function deleteAppt(id) {
+  const a = appts.find(x => x.id === id);
+  if (!a || !confirm('Remove appointment for ' + a.name + '?')) return;
+  appts = appts.filter(x => x.id !== id);
+  save(); render(); showToast('Removed.');
+}
+
+/* ===================================================
+   RENDER: STATS
+   =================================================== */
 function renderStats() {
   const t = todayStr();
   const tod = appts.filter(a => a.date === t).length;
   const up = appts.filter(a => a.date >= t && a.status !== 'done').length;
   const ip = appts.filter(a => a.status === 'inprogress').length;
+  const all = appts.length;
   document.getElementById('stats').innerHTML = `
     <div class="stat"><div class="num">${tod}</div><div class="lbl">Today</div></div>
     <div class="stat"><div class="num">${up}</div><div class="lbl">Upcoming</div></div>
     <div class="stat"><div class="num">${ip}</div><div class="lbl">In progress</div></div>
-    <div class="stat"><div class="num">${appts.length}</div><div class="lbl">All time</div></div>
+    <div class="stat"><div class="num">${all}</div><div class="lbl">All time</div></div>
   `;
 }
 
+/* ===================================================
+   RENDER: CALENDAR
+   Uses localDateStr() for day keys — no UTC drift.
+   =================================================== */
 function renderCalendar() {
   const days = getWeekDays();
-  const t = todayStr();
+  /* Use local date string for week title */
   document.getElementById('week-title').textContent =
     days[0].toLocaleDateString('en-US',{month:'short',day:'numeric'}) + ' – ' +
-    days[5].toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    days[6].toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+
+  const t = todayStr();
   document.getElementById('calendar').innerHTML = days.map(d => {
-    const ds = d.toISOString().split('T')[0];
-    const isT = ds === t, isP = ds < t;
-    const da = appts.filter(a => a.date === ds);
+    /* KEY FIX: use localDateStr() not toISOString() */
+    const ds = localDateStr(d);
+    const isT = ds === t;
+    const isP = ds < t;
+    const dayAppts = appts.filter(a => a.date === ds);
+
+    const dayEmpty = dayAppts.length === 0;
+    const chipsHtml = dayEmpty
+      ? '<div class="day-empty">Open</div>'
+      : '<div class="day-appts">' + dayAppts.map(a => {
+          const inst = (a.installer||'Adam').toLowerCase();
+          const chipClass = inst + '-' + a.status;
+          const labelClass = 'chip-' + inst + '-label';
+          const time = a.time || '9:00 AM';
+          const timeLabel = time === '9:00 AM' ? '' : time + ' &bull; ';
+          return `<div class="chip ${chipClass}" onclick="cycleStatus('${a.id}')" title="${a.name} — ${a.service} (${a.installer||'Adam'})">
+            <span class="chip-installer ${labelClass}">${a.installer||'Adam'}</span>
+            <div class="chip-name">${a.name}</div>
+            <div class="chip-svc">${timeLabel}${a.service}</div>
+          </div>`;
+        }).join('') + '</div>';
+
     return `<div class="day-col${isT?' is-today':''}${isP?' is-past':''}">
       <div class="day-head">
         <div class="day-name">${d.toLocaleDateString('en-US',{weekday:'short'})}</div>
         <div class="day-num">${d.getDate()}</div>
       </div>
-      ${da.length === 0 ? '<div class="day-empty">Open</div>' :
-        da.map(a => `<div class="chip s-${a.status}" onclick="cycleStatus('${a.id}')" title="Click to update status">
-          <div class="chip-name">${a.name}</div>
-          <div class="chip-svc">${a.time || '9:00 AM'} &mdash; ${a.service}</div>
-        </div>`).join('')}
+      ${chipsHtml}
     </div>`;
   }).join('');
 }
 
+/* ===================================================
+   RENDER: APPOINTMENT LIST
+   =================================================== */
 function renderList() {
   const t = todayStr();
   let list = [...appts];
@@ -431,16 +770,19 @@ function renderList() {
   else if (currentFilter === 'inprogress') list = list.filter(a => a.status === 'inprogress');
   else if (currentFilter === 'done') list = list.filter(a => a.status === 'done');
   list.sort((a,b) => a.date.localeCompare(b.date) || a.name.localeCompare(b.name));
+
   if (!list.length) {
     document.getElementById('appt-list').innerHTML = '<div class="empty">No appointments here.</div>';
     return;
   }
+
+  const sl = {scheduled:'Scheduled', inprogress:'In progress', done:'Done'};
   document.getElementById('appt-list').innerHTML = list.map(a => {
     const d = parseDate(a.date);
-    const sl = {scheduled:'Scheduled', inprogress:'In progress', done:'Done'};
-    const nb = a.status === 'scheduled'
+    const instLower = (a.installer||'Adam').toLowerCase();
+    const nb = a.status==='scheduled'
       ? `<button class="abtn go" onclick="cycleStatus('${a.id}')">Start</button>`
-      : a.status === 'inprogress'
+      : a.status==='inprogress'
       ? `<button class="abtn go" onclick="cycleStatus('${a.id}')">Done</button>`
       : `<button class="abtn" onclick="cycleStatus('${a.id}')">Reopen</button>`;
     return `<div class="acard s-${a.status}">
@@ -455,15 +797,16 @@ function renderList() {
         <div class="aveh">${a.vehicle||'—'}</div>
         <div class="asvc">${a.service}</div>
         <div class="ameta">
-          <span class="badge badge-${a.status}">${sl[a.status]}</span>
-          <span class="badge badge-${(a.installer||'adam').toLowerCase()}">${a.installer||''}</span>
-          <span style="font-size:11px;color:var(--text-muted);">${a.time || '9:00 AM'} drop-off</span>
+          <span class="badge badge-${a.status}">${sl[a.status]||a.status}</span>
+          <span class="badge badge-${instLower}">${a.installer||'Adam'}</span>
+          <span style="font-size:11px;color:var(--muted);">${a.time||'9:00 AM'} drop-off${a.duration?' &bull; '+a.duration+'h':''}</span>
         </div>
-        ${a.phone ? `<div class="aphone">${a.phone}</div>` : ''}
+        ${a.phone ? `<div class="aphone"><a href="tel:${a.phone.replace(/[^0-9]/g,'')}">${a.phone}</a></div>` : ''}
         ${a.notes ? `<div class="anotes">${a.notes}</div>` : ''}
       </div>
       <div class="aactions">
         ${nb}
+        <button class="abtn edit" onclick="openEditModal('${a.id}')">Edit</button>
         <button class="abtn rm" onclick="deleteAppt('${a.id}')">Remove</button>
       </div>
     </div>`;
@@ -472,58 +815,9 @@ function renderList() {
 
 function render() { renderStats(); renderCalendar(); renderList(); }
 
-function saveAppt(prefix) {
-  const name = document.getElementById(prefix+'name').value.trim();
-  const phone = document.getElementById(prefix+'phone').value.trim();
-  const date = document.getElementById(prefix+'date').value;
-  const time = document.getElementById(prefix+'time').value;
-  if (!name || !date || !phone) { showToast('Name, phone and date required'); return; }
-  appts.push({
-    id: Date.now().toString(36) + Math.random().toString(36).slice(2,5),
-    name, date,
-    time: document.getElementById(prefix+'time').value,
-    phone: document.getElementById(prefix+'phone').value.trim(),
-    vehicle: document.getElementById(prefix+'vehicle').value.trim(),
-    service: document.getElementById(prefix+'service').value.trim() || 'Service TBD',
-    installer: document.getElementById(prefix+'installer').value,
-    notes: document.getElementById(prefix+'notes').value.trim(),
-    status: 'scheduled',
-    created: new Date().toISOString()
-  });
-  save(); clearForm(prefix);
-  if (prefix === 'm-') closeModal();
-  render();
-  showToast('Appointment added!');
-}
-
-function clearForm(prefix) {
-  ['name','phone','vehicle','service','notes'].forEach(f => {
-    const el = document.getElementById(prefix+f);
-    if (el) el.value = '';
-  });
-  const d = document.getElementById(prefix+'date');
-  if (d) d.value = todayStr();
-  const ins = document.getElementById(prefix+'installer');
-  if (ins) ins.value = 'Adam';
-  const tm = document.getElementById(prefix+'time');
-  if (tm) tm.value = '9:00 AM';
-}
-
-function cycleStatus(id) {
-  const a = appts.find(x => x.id === id);
-  if (!a) return;
-  a.status = a.status === 'scheduled' ? 'inprogress' : a.status === 'inprogress' ? 'done' : 'scheduled';
-  save(); render();
-  showToast({scheduled:'Scheduled',inprogress:'In progress',done:'Done'}[a.status]);
-}
-
-function deleteAppt(id) {
-  const a = appts.find(x => x.id === id);
-  if (!a || !confirm('Remove appointment for ' + a.name + '?')) return;
-  appts = appts.filter(x => x.id !== id);
-  save(); render(); showToast('Removed.');
-}
-
+/* ===================================================
+   NAVIGATION
+   =================================================== */
 function changeWeek(d) { weekOffset += d; renderCalendar(); }
 function goToday() { weekOffset = 0; renderCalendar(); }
 function setFilter(f, btn) {
@@ -533,27 +827,53 @@ function setFilter(f, btn) {
   renderList();
 }
 
-function openModal() { document.getElementById('modal-bg').classList.add('open'); }
-function closeModal() { document.getElementById('modal-bg').classList.remove('open'); }
-function handleOverlayClick(e) { if (e.target === document.getElementById('modal-bg')) closeModal(); }
+/* ===================================================
+   MODALS
+   =================================================== */
+function openAddModal() { document.getElementById('add-modal-bg').classList.add('open'); }
+function closeAddModal() { document.getElementById('add-modal-bg').classList.remove('open'); }
+function handleAddOverlay(e) { if (e.target === document.getElementById('add-modal-bg')) closeAddModal(); }
 
+/* ===================================================
+   TOAST
+   =================================================== */
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2400);
 }
 
+/* ===================================================
+   INIT
+   1. Show localStorage data instantly
+   2. Merge from Google Sheets
+   3. Auto-refresh every 90s
+   =================================================== */
 document.getElementById('desk-form').innerHTML = formHTML('d-');
 document.getElementById('mobile-form').innerHTML = formHTML('m-');
+/* Wire up submit buttons since onclick in template literal has quoting issues */
+const ds = document.getElementById('d-submit');
+if (ds) ds.onclick = () => saveAppt('d-');
+const ms = document.getElementById('m-submit');
+if (ms) ms.onclick = () => saveAppt('m-');
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && document.activeElement.closest('.sidebar')) saveAppt('d-');
 });
 
 async function init() {
+  /* Show cached data immediately so UI is instant */
+  const cached = lsLoad();
+  if (cached.length > 0) { appts = cached; render(); }
+
+  /* Then sync from Google Sheets */
   await load();
   render();
-  setInterval(async () => { await load(); render(); }, 30000);
+
+  /* Auto-refresh every 90 seconds, skip if saving */
+  setInterval(async () => {
+    if (!isSaving) { await load(); render(); }
+  }, 90000);
 }
 init();
 </script>
